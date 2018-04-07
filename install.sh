@@ -34,7 +34,6 @@ displayErr() {
     # get user input
 server_setup() {
     clear
-    output "Hope you enjoy this install script created by http://www.my4x4.club. Please enter the information below. "
     read -p "Enter admin email (e.g. admin@example.com) : " EMAIL
     read -p "Enter servername (e.g. portal.example.com) : " SERVNAME
     read -p "Enter time zone (e.g. America/New_York) : " TIME
@@ -92,7 +91,6 @@ install_dependencies_apache() {
 
 install_timezone() {
     output "Update default timezone."
-    output "Thanks for using this installation script. Donations welcome PayPal:support@my4x4.club"
     # check if link file
     sudo [ -L /etc/localtime ] &&  sudo unlink /etc/localtime
     # update time zone
@@ -124,8 +122,8 @@ pterodactyl() {
     output "Install Pterodactyl-Panel."
     # Installing the Panel
     cd /var/www/pterodactyl/html
-    curl -Lo v0.5.7.tar.gz https://github.com/Pterodactyl/Panel/archive/v0.5.7.tar.gz
-    tar --strip-components=1 -xzvf v0.5.7.tar.gz
+    curl -Lo v0.6.4.tar.gz https://github.com/Pterodactyl/Panel/releases/download/v0.6.4/v0.6.4.tar.gz
+    tar --strip-components=1 -xzvf v0.6.4.tar.gz
     sudo chmod -R 777 storage/* bootstrap/cache
     curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
     composer setup
@@ -368,8 +366,8 @@ pterodactyl_daemon() {
     sudo mkdir -p /srv/daemon /srv/daemon-data
     sudo chown -R $whoami:$whoami /srv/daemon
     cd /srv/daemon
-    curl -Lo v0.3.7.tar.gz https://github.com/Pterodactyl/Daemon/archive/v0.3.7.tar.gz
-    tar --strip-components=1 -xzvf v0.3.7.tar.gz
+    curl -Lo daemon.tar.gz https://github.com/Pterodactyl/Daemon/releases/download/v0.4.5/daemon.tar.gz
+    tar --strip-components=1 -xzvf daemon.tar.gz
     npm install --only=production
 
     output "This step requires you to create your first node through your panel, only continue after you get your core code"
